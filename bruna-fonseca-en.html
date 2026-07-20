@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>Bruna Fonseca — Hellora Consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#FFFFFF;
+    --cream:#FFF9F3;
+    --wine:#7C1F2B;
+    --wine-deep:#5E1620;
+    --gold:#B08D3D;
+    --gold-pale:#EEE2C2;
+    --gold-line:#D8C48F;
+    --ink:#2A211C;
+    --ink-soft:#7A6B60;
+    --shadow: 0 10px 30px rgba(124,31,43,0.08);
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Jost', sans-serif;
+    font-weight:400;
+    min-height:100vh;
+    padding-bottom:92px;
+  }
+  ::selection{ background:var(--gold-pale); }
+
+  .ornament{
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    color:var(--gold); opacity:.85;
+  }
+  .ornament svg{ width:70px; height:12px; }
+
+  header.top{
+    padding:34px 20px 22px;
+    text-align:center;
+    background:
+      radial-gradient(120% 100% at 50% 0%, rgba(176,141,61,0.10), rgba(255,255,255,0) 60%),
+      var(--white);
+    border-bottom:1px solid var(--gold-line);
+  }
+  .eyebrow{
+    font-size:11px; letter-spacing:.28em; text-transform:uppercase;
+    color:var(--wine); font-weight:500; margin-bottom:6px;
+  }
+  h1.name{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    font-style:italic;
+    font-size:38px;
+    margin:2px 0 10px;
+    color:var(--ink);
+    letter-spacing:.01em;
+  }
+  main{ max-width:560px; margin:0 auto; padding:22px 16px 10px; }
+
+  .section-title{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic; font-weight:600;
+    font-size:23px;
+    color:var(--wine-deep);
+    margin:6px 2px 4px;
+  }
+  .section-sub{
+    font-size:12.5px; color:var(--ink-soft); margin:0 2px 16px;
+    letter-spacing:.02em;
+  }
+
+  .week-bar{
+    display:flex; align-items:center; justify-content:center; gap:14px;
+    background:var(--white); border:1px solid var(--gold-line); border-radius:999px;
+    padding:8px 18px; margin-bottom:16px; font-size:13px; color:var(--wine-deep);
+  }
+  .week-bar button{
+    border:none; background:var(--gold-pale); color:var(--wine-deep);
+    width:26px; height:26px; border-radius:50%; font-size:15px; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; line-height:1;
+  }
+  .week-bar button:active{ background:var(--gold); color:var(--white); }
+  .week-bar b{ color:var(--wine); font-weight:600; }
+
+  /* Treino sub-tabs */
+  .subtabs{
+    display:flex; gap:8px; margin-bottom:18px;
+  }
+  .subtabs button{
+    flex:1; padding:10px 0; border-radius:999px;
+    border:1px solid var(--gold-line);
+    background:var(--white); color:var(--ink-soft);
+    font-family:'Jost'; font-size:13.5px; letter-spacing:.04em;
+    cursor:pointer; transition:.2s;
+  }
+  .subtabs button.active{
+    background:var(--wine); color:var(--white); border-color:var(--wine);
+    box-shadow:var(--shadow);
+  }
+
+  .card{
+    background:var(--white);
+    border:1px solid var(--gold-line);
+    border-radius:14px;
+    padding:16px 16px 14px;
+    margin-bottom:14px;
+    box-shadow: 0 4px 14px rgba(124,31,43,0.05);
+  }
+  .ex-head{
+    display:flex; justify-content:space-between; align-items:baseline; gap:10px;
+  }
+  .ex-name{ font-weight:500; font-size:15.5px; color:var(--ink); }
+  .ex-meta{
+    display:flex; gap:6px; align-items:center; flex-shrink:0;
+  }
+  .badge{
+    font-size:11px; padding:3px 9px; border-radius:999px;
+    letter-spacing:.03em; font-weight:500; white-space:nowrap;
+  }
+  .badge.series{ background:var(--gold-pale); color:var(--wine-deep); }
+  .badge.rpe7{ background:#F3E7E8; color:var(--wine); }
+  .badge.rpe9{ background:var(--wine); color:var(--white); }
+  .badge.rest{ background:var(--cream); color:var(--ink-soft); border:1px solid var(--gold-line); }
+  .badge.musculo{ background:var(--gold-pale); color:var(--wine-deep); font-weight:500; }
+
+  .check-row{
+    margin-top:12px; padding-top:12px; border-top:1px dashed var(--gold-line);
+    display:flex; align-items:center; gap:10px; cursor:pointer; user-select:none;
+  }
+  .check-row input[type="checkbox"]{
+    position:absolute; opacity:0; width:0; height:0;
+  }
+  .check-box{
+    width:19px; height:19px; border-radius:6px; border:1.5px solid var(--gold-line);
+    background:var(--white); flex-shrink:0; position:relative; transition:.15s;
+  }
+  .check-row input:checked + .check-box{
+    background:var(--wine); border-color:var(--wine);
+  }
+  .check-row input:checked + .check-box::after{
+    content:''; position:absolute; left:5px; top:1px; width:5px; height:10px;
+    border:solid var(--white); border-width:0 2px 2px 0; transform:rotate(45deg);
+  }
+  .check-row input:focus-visible + .check-box{ outline:2px solid var(--gold); outline-offset:2px; }
+  .check-label{ font-size:13px; color:var(--ink-soft); }
+
+  .save-confirm{
+    display:none; text-align:center; font-size:12.5px; color:var(--wine-deep);
+    background:var(--gold-pale); border-radius:10px; padding:9px; margin-top:10px;
+  }
+  .last-saved{
+    text-align:center; font-size:11px; color:var(--ink-soft); margin-top:10px;
+  }
+
+  .ex-exec{
+    font-size:12.5px; color:var(--ink-soft); line-height:1.5;
+    margin-top:8px;
+  }
+
+  .carga-row{
+    margin-top:12px; padding-top:12px; border-top:1px dashed var(--gold-line);
+    display:flex; align-items:center; gap:10px;
+  }
+  .carga-row label{ font-size:12px; color:var(--ink-soft); flex-shrink:0; }
+  .carga-row input{
+    width:70px; padding:7px 8px; border-radius:8px;
+    border:1px solid var(--gold-line); font-family:'Jost'; font-size:14px;
+    text-align:center; color:var(--ink); background:var(--cream);
+  }
+  .carga-row input:focus{ outline:2px solid var(--gold); outline-offset:1px; }
+
+  /* Guia */
+  .accordion{
+    border:1px solid var(--gold-line); border-radius:12px; margin-bottom:10px;
+    background:var(--white); overflow:hidden;
+  }
+  .accordion summary{
+    padding:13px 16px; cursor:pointer; font-weight:500; font-size:14.5px;
+    list-style:none; display:flex; justify-content:space-between; align-items:center;
+    color:var(--wine-deep);
+  }
+  .accordion summary::-webkit-details-marker{ display:none; }
+  .accordion summary::after{
+    content:'+'; font-size:18px; color:var(--gold); font-weight:400;
+  }
+  .accordion[open] summary::after{ content:'–'; }
+  .accordion .acc-body{ padding:0 16px 14px; font-size:13px; color:var(--ink-soft); line-height:1.55; }
+  .acc-body .mini-ex{ margin-bottom:9px; }
+  .acc-body .mini-ex b{ color:var(--ink); font-weight:500; }
+
+  .guia-note{
+    background:var(--gold-pale); border-radius:12px; padding:14px 16px;
+    font-size:12.5px; color:var(--wine-deep); line-height:1.6; margin-bottom:12px;
+  }
+  table.rpe-table{
+    width:100%; border-collapse:collapse; margin-bottom:16px;
+    background:var(--white); border:1px solid var(--gold-line); border-radius:12px; overflow:hidden;
+  }
+  table.rpe-table th{
+    background:var(--gold-pale); color:var(--wine-deep); font-weight:500; font-size:12px;
+    text-align:left; padding:9px 12px; letter-spacing:.03em; text-transform:uppercase;
+  }
+  table.rpe-table td{
+    padding:10px 12px; font-size:13px; color:var(--ink-soft); border-top:1px solid var(--gold-line);
+    vertical-align:middle;
+  }
+  table.rpe-table td:first-child{ width:70px; }
+  .guia-list{ font-size:13px; color:var(--ink-soft); line-height:1.7; padding-left:0; list-style:none; }
+  .guia-list li{ margin-bottom:8px; padding-left:16px; position:relative; }
+  .guia-list li::before{ content:'◆'; color:var(--gold); font-size:8px; position:absolute; left:0; top:6px; }
+
+  /* Evaluation */
+  .quest{ margin-bottom:18px; }
+  .quest label{ font-size:14px; font-weight:500; display:block; margin-bottom:9px; }
+  .scale{ display:flex; gap:8px; }
+  .scale button{
+    flex:1; padding:11px 0; border-radius:10px; border:1px solid var(--gold-line);
+    background:var(--white); font-family:'Jost'; font-size:15px; color:var(--ink-soft);
+    cursor:pointer; transition:.15s;
+  }
+  .scale button.sel{ background:var(--wine); color:var(--white); border-color:var(--wine); }
+  textarea{
+    width:100%; border:1px solid var(--gold-line); border-radius:10px; padding:10px 12px;
+    font-family:'Jost'; font-size:13.5px; color:var(--ink); resize:vertical; min-height:70px;
+    background:var(--white);
+  }
+  textarea:focus{ outline:2px solid var(--gold); outline-offset:1px; }
+  .submit-btn{
+    width:100%; padding:14px; border:none; border-radius:12px;
+    background:var(--wine); color:var(--white); font-family:'Jost'; font-size:14.5px;
+    letter-spacing:.03em; cursor:pointer; margin-top:6px; box-shadow:var(--shadow);
+  }
+  .submit-btn:active{ background:var(--wine-deep); }
+
+  .hist-item{
+    border:1px solid var(--gold-line); border-radius:12px; padding:12px 14px; margin-bottom:10px;
+    background:var(--white); font-size:12.5px; color:var(--ink-soft);
+  }
+  .hist-item .hd{ display:flex; justify-content:space-between; margin-bottom:6px; }
+  .hist-item .hd b{ color:var(--wine-deep); font-weight:500; }
+  .hist-item .vals{ display:flex; flex-wrap:wrap; gap:10px; }
+  .hist-item .vals span{ background:var(--cream); padding:3px 8px; border-radius:6px; }
+
+  /* Perfil */
+  .profile-card{
+    background:var(--white); border:1px solid var(--gold-line); border-radius:18px;
+    padding:28px 20px; text-align:center; box-shadow:var(--shadow);
+  }
+  .monogram{
+    width:76px; height:76px; border-radius:50%; margin:0 auto 16px;
+    background:linear-gradient(145deg, var(--wine), var(--wine-deep));
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Cormorant Garamond', serif; font-size:30px; color:var(--gold-pale);
+    font-style:italic; box-shadow:0 6px 18px rgba(124,31,43,0.25);
+  }
+  .profile-card h2{
+    font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:500;
+    font-size:26px; margin:0 0 4px; color:var(--ink);
+  }
+  .profile-card .sub{ font-size:12.5px; color:var(--ink-soft); margin-bottom:20px; letter-spacing:.02em; }
+  .profile-grid{
+    display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:20px;
+  }
+  .profile-grid div{
+    background:var(--cream); border-radius:10px; padding:12px 6px;
+  }
+  .profile-grid .v{ font-family:'Cormorant Garamond', serif; font-size:22px; color:var(--wine); font-weight:600; }
+  .profile-grid .l{ font-size:10px; color:var(--ink-soft); letter-spacing:.06em; text-transform:uppercase; margin-top:2px; }
+  .goal-box{
+    text-align:left; background:var(--gold-pale); border-radius:12px; padding:14px 16px;
+    font-size:13px; color:var(--wine-deep); line-height:1.55;
+  }
+  .goal-box .lbl{ font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); font-weight:500; margin-bottom:5px; }
+  .sync-status{
+    text-align:center; font-size:11px; color:var(--ink-soft); margin-top:16px; letter-spacing:.02em;
+  }
+  .sync-dot{ display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--gold); margin-right:5px; }
+
+  /* Bottom nav */
+  nav.tabbar{
+    position:fixed; bottom:0; left:0; right:0;
+    background:var(--white); border-top:1px solid var(--gold-line);
+    display:flex; z-index:50;
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  nav.tabbar button{
+    flex:1; background:none; border:none; padding:12px 4px 10px;
+    display:flex; flex-direction:column; align-items:center; gap:4px;
+    font-family:'Jost'; font-size:11px; color:var(--ink-soft); cursor:pointer;
+    letter-spacing:.02em;
+  }
+  nav.tabbar button .dot{
+    width:5px; height:5px; border-radius:50%; background:transparent; margin-bottom:1px;
+  }
+  nav.tabbar button.active{ color:var(--wine); }
+  nav.tabbar button.active .dot{ background:var(--gold); }
+  nav.tabbar button svg{ width:20px; height:20px; }
+
+  .view{ display:none; animation:fade .25s ease; }
+  .view.active{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+
+  @media (prefers-reduced-motion: reduce){
+    .view{ animation:none; }
+  }
+
+  a.toast-link{ color:var(--wine); }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="ornament">
+    <svg viewBox="0 0 70 12" fill="none"><path d="M0 6 H28" stroke="currentColor" stroke-width="1"/><circle cx="35" cy="6" r="3" stroke="currentColor" stroke-width="1"/><path d="M42 6 H70" stroke="currentColor" stroke-width="1"/></svg>
+  </div>
+  <div class="eyebrow">Hellora Consulting</div>
+  <h1 class="name">Bruna Fonseca</h1>
+</header>
+
+<main>
+
+  <!-- TREINO -->
+  <section id="view-treino" class="view active">
+    <div class="section-title">Workout</div>
+    <div class="section-sub">Full body with emphasis on legs and glutes · 3x per week · 3 sets of 10 reps</div>
+
+    <div class="week-bar">
+      <button id="week-prev">‹</button>
+      <span>Week <b id="week-current">1</b> of 13</span>
+      <button id="week-next">›</button>
+    </div>
+
+    <div class="subtabs">
+      <button class="sub-btn active" data-w="A">Workout A</button>
+      <button class="sub-btn" data-w="B">Workout B</button>
+      <button class="sub-btn" data-w="C">Workout C</button>
+    </div>
+
+    <div id="workout-list"></div>
+
+    <button class="submit-btn" id="save-treino">Save workout</button>
+    <div id="save-confirm" class="save-confirm">Workout saved successfully.</div>
+    <div id="last-saved" class="last-saved"></div>
+  </section>
+
+  <!-- GUIA -->
+  <section id="view-guia" class="view">
+    <div class="section-title">Execution &amp; Intensity Guide</div>
+    <div class="section-sub">How to use RPE and run each workout safely</div>
+
+    <table class="rpe-table">
+      <thead><tr><th>RPE</th><th>Effort</th></tr></thead>
+      <tbody>
+        <tr><td class="badge rpe7" style="display:inline-block;">RPE 7</td><td>Moderate — a few more reps still possible</td></tr>
+        <tr><td class="badge rpe9" style="display:inline-block;">RPE 9</td><td>Near max — very close to failure</td></tr>
+      </tbody>
+    </table>
+
+    <details class="accordion">
+      <summary>Workout A — Execution</summary>
+      <div class="acc-body" id="acc-A"></div>
+    </details>
+    <details class="accordion">
+      <summary>Workout B — Execution</summary>
+      <div class="acc-body" id="acc-B"></div>
+    </details>
+    <details class="accordion">
+      <summary>Workout C — Execution</summary>
+      <div class="acc-body" id="acc-C"></div>
+    </details>
+
+    <div class="section-title" style="margin-top:22px; font-size:19px;">General guidelines</div>
+    <ul class="guia-list">
+      <li>Suggested tempo: 2s on the way down, 1s pause at peak contraction, 1s on the way up.</li>
+      <li>Progression: for the first 3–4 weeks, prioritize technique and mind-muscle connection. From week 4–5 onward, increase the load while keeping the 10 reps.</li>
+      <li>Warm-up: 1–2 light approach sets before the first multi-joint exercise of each workout.</li>
+      <li>Warning sign: lower back pain during the hip thrust, kickback, or split squat signals compensation — reduce the load and reinforce glute activation before progressing.</li>
+    </ul>
+  </section>
+
+  <!-- EVALUATION -->
+  <section id="view-avaliacao" class="view">
+    <div class="section-title">Evaluation</div>
+    <div class="section-sub">How was today's workout? · Week <b id="week-current-aval">1</b> of 13</div>
+
+    <div id="quest-block">
+      <div class="quest">
+        <label>Frequency (workouts completed this week)</label>
+        <div class="scale" data-q="frequencia">
+          <button data-v="1">1</button><button data-v="2">2</button><button data-v="3">3</button><button data-v="4">4</button><button data-v="5">5</button>
+        </div>
+      </div>
+      <div class="quest">
+        <label>Mood</label>
+        <div class="scale" data-q="humor">
+          <button data-v="1">1</button><button data-v="2">2</button><button data-v="3">3</button><button data-v="4">4</button><button data-v="5">5</button>
+        </div>
+      </div>
+      <div class="quest">
+        <label>Muscle soreness</label>
+        <div class="scale" data-q="dor">
+          <button data-v="1">1</button><button data-v="2">2</button><button data-v="3">3</button><button data-v="4">4</button><button data-v="5">5</button>
+        </div>
+      </div>
+      <div class="quest">
+        <label>Perceived workout difficulty</label>
+        <div class="scale" data-q="dificuldade">
+          <button data-v="1">1</button><button data-v="2">2</button><button data-v="3">3</button><button data-v="4">4</button><button data-v="5">5</button>
+        </div>
+      </div>
+      <div class="quest">
+        <label>Sleep</label>
+        <div class="scale" data-q="sono">
+          <button data-v="1">1</button><button data-v="2">2</button><button data-v="3">3</button><button data-v="4">4</button><button data-v="5">5</button>
+        </div>
+      </div>
+      <div class="quest">
+        <label>Nutrition</label>
+        <div class="scale" data-q="alimentacao">
+          <button data-v="1">1</button><button data-v="2">2</button><button data-v="3">3</button><button data-v="4">4</button><button data-v="5">5</button>
+        </div>
+      </div>
+      <div class="quest">
+        <label>Notes (optional)</label>
+        <textarea id="obs-input" placeholder="Any pain, difficulty, or specific note..."></textarea>
+      </div>
+      <button class="submit-btn" id="submit-avaliacao">Submit evaluation</button>
+      <div id="eval-confirm" class="save-confirm">Evaluation saved.</div>
+    </div>
+
+    <div class="section-title" style="margin-top:26px; font-size:19px;">History</div>
+    <div id="hist-list"></div>
+  </section>
+
+  <!-- PROFILE -->
+  <section id="view-perfil" class="view">
+    <div class="profile-card">
+      <div class="monogram">BF</div>
+      <h2>Bruna Fonseca</h2>
+      <div class="profile-grid">
+        <div><div class="v">38</div><div class="l">Years</div></div>
+        <div><div class="v">1.69</div><div class="l">Meters</div></div>
+        <div><div class="v">53</div><div class="l">Kg</div></div>
+      </div>
+      <div class="goal-box">
+        <div class="lbl">Goal</div>
+        Building muscle and definition in the legs and glutes, training full body 3x per week at the gym.
+      </div>
+      <div class="sync-status"><span class="sync-dot"></span><span id="sync-text">synced</span></div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="tabbar">
+  <button class="tab-btn active" data-view="treino">
+    <span class="dot"></span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7v10M18 7v10M2 10h4M18 10h4M6 12h12"/></svg>
+    Workout
+  </button>
+  <button class="tab-btn" data-view="guia">
+    <span class="dot"></span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19.5V5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5a2.5 2.5 0 0 0 0 5H20"/></svg>
+    Guide
+  </button>
+  <button class="tab-btn" data-view="avaliacao">
+    <span class="dot"></span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 11l3 3L22 4M21 12v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h11"/></svg>
+    Evaluation
+  </button>
+  <button class="tab-btn" data-view="perfil">
+    <span class="dot"></span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+    Profile
+  </button>
+</nav>
+
+<script>
+(function(){
+  const FIREBASE_URL = "https://helloradana-consultoria-default-rtdb.firebaseio.com";
+  const ALUNO_ID = "bruna";
+  const STATE_PATH = `${FIREBASE_URL}/alunos/${ALUNO_ID}/state.json`;
+  const LOCAL_KEY = "hellora_bruna_state";
+
+  const EXERCICIOS = {
+    A: {
+      label: "Focus: quads",
+      lista: [
+        { id:"agachamento-livre", nome:"Squat", series:"3x10", rpe:7, pausa:"1.5-2 min", musculo:"Quads", exec:"Feet shoulder-width apart, lower down to parallel keeping your knee aligned with your toes. Drive up by pushing the floor away." },
+        { id:"elevação-pélvica", nome:"Hip Thrust", series:"3x10", rpe:9, pausa:"1.5 min", musculo:"Glutes", exec:"Upper back on the floor or a low bench, chin neutral. Raise until full hip extension, squeeze the glutes for 1–2s at the top, avoid arching the lower back." },
+        { id:"cadeira-extensora", nome:"Leg Extension", series:"3x10", rpe:9, pausa:"1 min", musculo:"Quads", exec:"Controlled motion on the way up and down, don't let the weight drop. Pause for 1s at the top." },
+        { id:"puxada-aberta", nome:"Wide-Grip Pulldown", series:"3x10", rpe:7, pausa:"1 min", musculo:"Back", exec:"Wide grip, pull toward your chest driving the elbows down and back, without swinging your torso." },
+        { id:"desenvolvimento", nome:"Shoulder Press", series:"3x10", rpe:7, pausa:"1 min", musculo:"Shoulders", exec:"Controlled press without fully locking the elbow, lower to ear height, core engaged." },
+        { id:"sequencia-abdominal", nome:"Ab Sequence", series:"3x10", rpe:null, pausa:"2 min", musculo:"Abs", exec:"Controlled movement, avoid pulling on your neck, focus on contracting the abs.", semCarga:true },
+      ]
+    },
+    B: {
+      label: "Focus: hamstrings and glutes",
+      lista: [
+        { id:"agachamento-sumô", nome:"Sumo Squat", series:"3x10", rpe:7, pausa:"1.5-2 min", musculo:"Glutes & Adductors", exec:"Feet wider than shoulder-width, toes pointed out. Lower keeping knees tracking your toes, focus on adductors and glutes." },
+        { id:"afundo", nome:"Lunge", series:"3x10 (each leg)", rpe:7, pausa:"1.5 min", musculo:"Quads & Glutes", exec:"Step forward or stationary, lower until the back knee nearly touches the floor, torso upright, drive up through the front heel." },
+        { id:"cadeira-flexora", nome:"Leg Curl", series:"3x10", rpe:9, pausa:"1 min", musculo:"Hamstrings", exec:"Avoid using hip momentum, full contraction at the top, controlled lowering." },
+        { id:"peck-deck", nome:"Pec Deck (Chest Fly)", series:"3x10", rpe:9, pausa:"1 min", musculo:"Chest", exec:"Arcing motion, elbows slightly bent, pause and squeeze at the close." },
+        { id:"remada-baixa-triângulo", nome:"Seated Row (V-Bar)", series:"3x10", rpe:9, pausa:"1 min", musculo:"Back", exec:"Torso upright, pull driving the elbows back close to the body, squeeze the shoulder blades at the end." },
+        { id:"panturrilha", nome:"Calf Raise", series:"3x10", rpe:9, pausa:"1 min", musculo:"Calves", exec:"Full range of motion, pause 1–2s at the top (contracted) and lower to a full stretch." },
+      ]
+    },
+    C: {
+      label: "Focus: glutes and unilateral work",
+      lista: [
+        { id:"agachamento-búlgaro", nome:"Bulgarian Split Squat", series:"3x10 (each leg)", rpe:7, pausa:"1.5-2 min", musculo:"Glutes & Quads", exec:"Back foot resting on a bench, torso slightly leaned forward for more glute emphasis, controlled descent." },
+        { id:"coice-na-polia", nome:"Cable Kickback", series:"3x10 (each leg)", rpe:7, pausa:"1 min", musculo:"Glutes", exec:"Stable torso, avoid compensating with the lower back, hip extension with a squeeze at the end of the movement." },
+        { id:"cadeira-abdutora", nome:"Hip Abduction", series:"3x10", rpe:9, pausa:"1 min", musculo:"Outer Glutes", exec:"Torso resting against the pad, controlled movement, pause 1–2s at full opening." },
+        { id:"crucifixo-invertido-máquina", nome:"Machine Reverse Fly", series:"3x10", rpe:9, pausa:"1 min", musculo:"Rear Delts/Back", exec:"Elbows slightly bent, drive the arms back focusing on squeezing the rear shoulder/upper back, no momentum." },
+        { id:"tríceps-coice", nome:"Triceps Kickback", series:"3x10", rpe:7, pausa:"1 min", musculo:"Triceps", exec:"Elbow fixed at your side, full arm extension, squeeze at the end of the movement." },
+        { id:"sequencia-abdominal", nome:"Ab Sequence", series:"3x10", rpe:null, pausa:"2 min", musculo:"Abs", exec:"Controlled movement, focus on the contraction, without using your neck or lower back for momentum.", semCarga:true },
+      ]
+    }
+  };
+
+  let state = {
+    _semanaAtual: 1
+  };
+
+  function loadLocal(){
+    try{
+      const raw = localStorage.getItem(LOCAL_KEY);
+      if(raw) return JSON.parse(raw);
+    }catch(e){}
+    return null;
+  }
+  function saveLocal(){
+    try{ localStorage.setItem(LOCAL_KEY, JSON.stringify(state)); }catch(e){}
+  }
+
+  async function loadRemote(){
+    try{
+      const res = await fetch(STATE_PATH, { cache:"no-store" });
+      if(!res.ok) throw new Error("fetch failed");
+      const data = await res.json();
+      return data;
+    }catch(e){
+      return null;
+    }
+  }
+  async function saveRemote(){
+    try{
+      await fetch(STATE_PATH, {
+        method:"PUT",
+        headers:{ "Content-Type":"application/json" },
+        body: JSON.stringify(state)
+      });
+      setSyncStatus("synced");
+    }catch(e){
+      setSyncStatus("saved locally");
+    }
+  }
+
+  function setSyncStatus(text){
+    const el = document.getElementById("sync-text");
+    if(el) el.textContent = text;
+  }
+
+  function persist(){
+    state._updated = new Date().toISOString();
+    saveLocal();
+    saveRemote();
+  }
+
+  async function initState(){
+    const local = loadLocal();
+    if(local) state = Object.assign(state, local);
+    const remote = await loadRemote();
+    if(remote){
+      state = Object.assign(state, remote);
+      saveLocal();
+      setSyncStatus("synced");
+    } else if(local){
+      setSyncStatus("saved locally");
+    } else {
+      setSyncStatus("new profile");
+    }
+    renderWorkout(currentWorkout);
+    renderGuiaAccordions();
+    loadAvaliacaoForWeek();
+    renderHistorico();
+    updateWeekDisplays();
+  }
+
+  function updateWeekDisplays(){
+    const w = state._semanaAtual || 1;
+    const a = document.getElementById("week-current");
+    const b = document.getElementById("week-current-aval");
+    if(a) a.textContent = w;
+    if(b) b.textContent = w;
+  }
+
+  function onWeekChange(){
+    persist();
+    updateWeekDisplays();
+    renderWorkout(currentWorkout);
+    loadAvaliacaoForWeek();
+  }
+
+  document.getElementById("week-prev").addEventListener("click", ()=>{
+    state._semanaAtual = Math.max(1, (state._semanaAtual||1) - 1);
+    onWeekChange();
+  });
+  document.getElementById("week-next").addEventListener("click", ()=>{
+    state._semanaAtual = Math.min(13, (state._semanaAtual||1) + 1);
+    onWeekChange();
+  });
+
+  // ---------- TREINO ----------
+  let currentWorkout = "A";
+
+  document.querySelectorAll(".sub-btn").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      document.querySelectorAll(".sub-btn").forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      currentWorkout = btn.dataset.w;
+      renderWorkout(currentWorkout);
+    });
+  });
+
+  function rpeBadgeClass(rpe){ return rpe >= 9 ? "rpe9" : "rpe7"; }
+
+  function keyFor(week, treino, slug){ return "w" + week + "-" + treino + "-" + slug; }
+
+  // Finds the most recent load registered for this exercise (any past week),
+  // used to prefill the load field even before this week's entry exists.
+  function getLastLoad(treino, slug){
+    let best = null, bestWeek = -1;
+    for(const key in state){
+      const m = /^w(\d+)-([A-Za-z]+)-(.+)$/.exec(key);
+      if(m && m[2]===treino && m[3]===slug){
+        const wk = parseInt(m[1], 10);
+        const entry = state[key];
+        if(entry && typeof entry.load === "number" && wk > bestWeek){ bestWeek = wk; best = entry.load; }
+      }
+    }
+    return best;
+  }
+
+  // transient session state (checks + carga inputs before "Salvar treino")
+  let sessaoAtual = {};
+
+  function renderWorkout(w){
+    const wrap = document.getElementById("workout-list");
+    wrap.innerHTML = "";
+    sessaoAtual = {};
+    const week = state._semanaAtual || 1;
+
+    EXERCICIOS[w].lista.forEach(ex=>{
+      const card = document.createElement("div");
+      card.className = "card";
+
+      const savedEntry = state[keyFor(week, w, ex.id)];
+      const lastLoad = getLastLoad(w, ex.id);
+      const cargaAtual = (savedEntry && typeof savedEntry.load === "number")
+        ? savedEntry.load
+        : (lastLoad != null ? lastLoad : "");
+      const jaConcluido = !!(savedEntry && savedEntry.done);
+
+      sessaoAtual[ex.id] = { concluido: jaConcluido, carga: cargaAtual };
+
+      const rpeBadge = (ex.rpe != null)
+        ? `<span class="badge ${rpeBadgeClass(ex.rpe)}">RPE ${ex.rpe}</span>`
+        : "";
+      const restBadge = `<span class="badge rest">${ex.pausa || "—"}</span>`;
+
+      const cargaBlock = ex.semCarga
+        ? ``
+        : `<div class="carga-row">
+            <label>Load (kg)</label>
+            <input type="number" inputmode="decimal" step="0.5" min="0" value="${cargaAtual}" data-ex="${ex.id}">
+          </div>`;
+
+      card.innerHTML = `
+        <div class="ex-head">
+          <div class="ex-name">${ex.nome}</div>
+          <div class="ex-meta">
+            <span class="badge series">${ex.series}</span>
+            ${rpeBadge}
+            ${restBadge}
+          </div>
+        </div>
+        ${cargaBlock}
+        <label class="check-row">
+          <input type="checkbox" data-check="${ex.id}" ${jaConcluido ? "checked" : ""}>
+          <span class="check-box"></span>
+          <span class="check-label">Check</span>
+        </label>
+      `;
+      wrap.appendChild(card);
+    });
+
+    wrap.querySelectorAll("input[data-ex]").forEach(inp=>{
+      inp.addEventListener("input", ()=>{
+        sessaoAtual[inp.dataset.ex].carga = inp.value;
+      });
+    });
+    wrap.querySelectorAll("input[data-check]").forEach(chk=>{
+      chk.addEventListener("change", ()=>{
+        sessaoAtual[chk.dataset.check].concluido = chk.checked;
+      });
+    });
+
+    renderLastSaved(w);
+  }
+
+  function renderLastSaved(w){
+    const el = document.getElementById("last-saved");
+    const week = state._semanaAtual || 1;
+    const anySaved = EXERCICIOS[w].lista.some(ex => !!state[keyFor(week, w, ex.id)]);
+    el.textContent = anySaved ? `Week ${week} already saved` : `Not saved yet for week ${week}`;
+  }
+
+  document.getElementById("save-treino").addEventListener("click", ()=>{
+    const week = state._semanaAtual || 1;
+    EXERCICIOS[currentWorkout].lista.forEach(ex=>{
+      const s = sessaoAtual[ex.id];
+      const entry = { done: !!s.concluido };
+      if(!ex.semCarga && s.carga !== "" && s.carga != null){
+        const val = parseFloat(s.carga);
+        if(!isNaN(val)) entry.load = val;
+      }
+      state[keyFor(week, currentWorkout, ex.id)] = entry;
+    });
+
+    persist();
+    renderLastSaved(currentWorkout);
+    document.getElementById("save-confirm").style.display = "block";
+    setTimeout(()=>{ document.getElementById("save-confirm").style.display = "none"; }, 2200);
+  });
+
+  // ---------- GUIA accordions ----------
+  function renderGuiaAccordions(){
+    ["A","B","C"].forEach(w=>{
+      const el = document.getElementById("acc-"+w);
+      el.innerHTML = EXERCICIOS[w].lista.map(ex=>{
+        return `<div class="mini-ex"><b>${ex.nome}</b> <span class="badge musculo">${ex.musculo}</span><br>${ex.exec}</div>`;
+      }).join("");
+    });
+  }
+
+  // ---------- AVALIAÇÃO ----------
+  const respostas = { frequencia:null, humor:null, dor:null, dificuldade:null, sono:null, alimentacao:null };
+  const EVAL_KEYS = { frequencia:"frequência", humor:"humor", dor:"dor", dificuldade:"dificuldade", sono:"sono", alimentacao:"alimentação" };
+
+  document.querySelectorAll(".scale").forEach(scale=>{
+    const q = scale.dataset.q;
+    scale.querySelectorAll("button").forEach(b=>{
+      b.addEventListener("click", ()=>{
+        scale.querySelectorAll("button").forEach(x=>x.classList.remove("sel"));
+        b.classList.add("sel");
+        respostas[q] = parseInt(b.dataset.v);
+      });
+    });
+  });
+
+  // Prefills the evaluation form with whatever was already saved for the
+  // current week (evaluation is one record per week, not a running list).
+  function loadAvaliacaoForWeek(){
+    const week = state._semanaAtual || 1;
+    const notas = (state.evalNotas && state.evalNotas[week]) || {};
+    Object.keys(EVAL_KEYS).forEach(q=>{
+      const v = notas[EVAL_KEYS[q]];
+      respostas[q] = (typeof v === "number") ? v : null;
+    });
+    document.querySelectorAll(".scale").forEach(scale=>{
+      const q = scale.dataset.q;
+      scale.querySelectorAll("button").forEach(b=>{
+        b.classList.toggle("sel", respostas[q] != null && parseInt(b.dataset.v) === respostas[q]);
+      });
+    });
+    const obsInput = document.getElementById("obs-input");
+    obsInput.value = (state.evalObs && state.evalObs[week]) || "";
+  }
+
+  document.getElementById("submit-avaliacao").addEventListener("click", ()=>{
+    if(Object.values(respostas).some(v=>v===null)){
+      alert("Please answer all scales before submitting.");
+      return;
+    }
+    const week = state._semanaAtual || 1;
+    const obs = document.getElementById("obs-input").value.trim();
+
+    if(!state.evalNotas) state.evalNotas = {};
+    state.evalNotas[week] = {
+      "frequência": respostas.frequencia,
+      "humor": respostas.humor,
+      "dor": respostas.dor,
+      "dificuldade": respostas.dificuldade,
+      "sono": respostas.sono,
+      "alimentação": respostas.alimentacao
+    };
+    if(!state.evalObs) state.evalObs = {};
+    if(obs){ state.evalObs[week] = obs; } else { delete state.evalObs[week]; }
+
+    persist();
+    renderHistorico();
+
+    const conf = document.getElementById("eval-confirm");
+    conf.textContent = `Week ${week} evaluation saved.`;
+    conf.style.display = "block";
+    setTimeout(()=>{ conf.style.display = "none"; }, 2200);
+  });
+
+  function renderHistorico(){
+    const list = document.getElementById("hist-list");
+    const notas = state.evalNotas || {};
+    const weeks = Object.keys(notas).map(w=>parseInt(w,10)).sort((a,b)=>b-a);
+
+    if(!weeks.length){
+      list.innerHTML = `<div class="hist-item">No evaluation recorded yet.</div>`;
+      return;
+    }
+
+    list.innerHTML = weeks.map(w=>{
+      const n = notas[w] || {};
+      const obs = (state.evalObs && state.evalObs[w]) || "";
+      return `
+        <div class="hist-item">
+          <div class="hd"><b>Week ${w}</b></div>
+          <div class="vals">
+            <span>Frequency ${n["frequência"] ?? "-"}</span>
+            <span>Mood ${n["humor"] ?? "-"}</span>
+            <span>Pain ${n["dor"] ?? "-"}</span>
+            <span>Difficulty ${n["dificuldade"] ?? "-"}</span>
+            <span>Sleep ${n["sono"] ?? "-"}</span>
+            <span>Nutrition ${n["alimentação"] ?? "-"}</span>
+          </div>
+          ${obs ? `<div style="margin-top:6px;">${obs}</div>` : ""}
+        </div>
+      `;
+    }).join("");
+  }
+
+  // ---------- TAB NAV ----------
+  document.querySelectorAll(".tab-btn").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+      document.getElementById("view-"+btn.dataset.view).classList.add("active");
+    });
+  });
+
+  initState();
+})();
+</script>
+</body>
+</html>
